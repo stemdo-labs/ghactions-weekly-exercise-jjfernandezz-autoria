@@ -31,7 +31,7 @@ runs:
         nombre_completo="$image_name:$version"
         echo "el nombre completo de la imagen es: $nombre_completo"
 
-        echo "full_nombre=$nombre_completo" >> "$GITHUB_OUTPUT"
+        echo "full_nombre=$nombre_completo" >> $GITHUB_OUTPUT
 
         
 
