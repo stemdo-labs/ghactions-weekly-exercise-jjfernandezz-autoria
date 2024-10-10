@@ -1,0 +1,23 @@
+name: "Taggear la imagen docker"
+description: "Se etiqueta la imagen de docker antes de subirla al registry"
+inputs:
+  version:
+    description: "version de la app"
+    required: true
+
+runs:
+  using: composite
+  steps:
+    
+    - name: clonamos repo
+      uses: actions/checkout@v4
+
+    - name: mostrar directorio
+      shell: bash
+      run: ls -la
+      
+    - name: Se obtiene la version
+      shell: bash
+      run: |
+        version:$(jq -r '.version' package.json)
+        echo "La version del la app es: $version"  

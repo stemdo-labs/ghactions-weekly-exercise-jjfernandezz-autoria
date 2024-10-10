@@ -1,0 +1,10 @@
+on:
+  workflow_dispatch:
+    
+jobs:
+  mostrar_version: 
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: accion composite
+        uses: ./.github/actions/action.yaml
