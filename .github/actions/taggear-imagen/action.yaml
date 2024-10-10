@@ -15,5 +15,5 @@ runs:
     - name: Se obtiene la version
       shell: bash
       run: |
-        version:$(jq -r '.version' package.json)
+        version=$(jq -r '.version' package.json)
         echo "La version del la app es: $version"  
