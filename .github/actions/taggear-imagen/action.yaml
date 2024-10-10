@@ -6,12 +6,8 @@ inputs:
     required: true
 
 runs:
-  using: composite
+  using: "composite"
   steps:
-    
-    - name: clonamos repo
-      uses: actions/checkout@v4
-
     - name: mostrar directorio
       shell: bash
       run: ls -la
