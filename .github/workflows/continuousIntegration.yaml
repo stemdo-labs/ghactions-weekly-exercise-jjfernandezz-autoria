@@ -7,4 +7,4 @@ jobs:
     
     steps:
       - name: accion composite
-        uses: ./.github/actions/action.yaml
+        uses: ./.github/actions
