@@ -30,5 +30,10 @@ runs:
         echo "el nombre completo de la imagen es: $nombre_completo"
 
         echo "full_name=$nombre_completo" >> $GITHUB_OUTPUT
+
+    - name: Verificar si el output se generó correctamente
+      shell: bash
+      run: |
+        echo "::debug::Verificando full_name: $nombre_completo"
         
 
