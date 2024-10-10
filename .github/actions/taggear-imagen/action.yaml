@@ -9,6 +9,9 @@ inputs:
     description: "version de la app"
     required: true
 
+outputs:
+  full_name:
+    description: "Nombre completo de la imagen docker"
 
 runs:
   using: "composite"
