@@ -21,6 +21,7 @@ runs:
       run: ls -la
 
     - name: extraer inputs
+      id: name_complete
       shell: bash
       run: |
         image_name=${{inputs.image_name}}
@@ -34,6 +35,6 @@ runs:
     - name: Verificar si el output se generó correctamente
       shell: bash
       run: |
-        echo "::debug::Verificando full_name: $nombre_completo"
+        echo "${{steps.name_complete.outputs.full_name}}"
         
 
