@@ -4,4 +4,6 @@ on:
 jobs:
   cd:
     runs-on: ubuntu-latest
-    
+    steps:
+      - name: Despliegue
+        run: echo "Despliegue"
