@@ -25,4 +25,4 @@ jobs:
 
       - name: Mostrar imagen comleta
         run: |
-          echo "nombre completo: ${{steps.taggear_imagen.outputs.full_name}}"
+          echo "nombre completo: ${{ steps.taggear_imagen.outputs.full_name}} "
