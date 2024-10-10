@@ -31,7 +31,7 @@ jobs:
           version: "${{steps.tomar_version.outputs.version}}"
 
       - name: hacer run del contenedor
-        run: docker run -dit ${{ steps.tag.outputs.tag}} 
+        run: docker run -dit -p 8080:8080 ${{ steps.tag.outputs.tag}} 
 
       - name: comprobar el despliegue haciendo curl
         run: curl http://localhost:8080
