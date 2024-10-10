@@ -12,6 +12,7 @@ inputs:
 outputs:
   full_name:
     description: "Nombre completo de la imagen docker"
+    value: ${{ steps.name_complete.outputs.full_name}}
 
 runs:
   using: "composite"
