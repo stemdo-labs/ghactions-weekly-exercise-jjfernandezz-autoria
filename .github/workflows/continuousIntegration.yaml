@@ -8,6 +8,21 @@ jobs:
     steps:
       - name: clonamos repo
         uses: actions/checkout@v4
-        
+
+      - name: Se obtiene la version
+        id: tomar_version
+        run: |
+          version=$(jq -r '.version' package.json)
+          echo "La version del la app es: $version"
+          echo "version=$version" >> $GITHUB_OUTPUT
+
       - name: accion composite
         uses: ./.github/actions/taggear-imagen
+        id: taggear_imagen
+        with:
+          image_name: "mi-app-angular"
+          version: "${{steps.tomar_version.outputs.version}}"
+
+      - name: Mostrar imagen comleta
+        run: |
+          echo "nombre completo: ${{steps.taggear-imagen.outputs.full_name}}"
