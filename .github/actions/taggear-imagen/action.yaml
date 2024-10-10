@@ -10,9 +10,9 @@ inputs:
     required: true
 
 outputs:
-  full_name:
+  tag:
     description: "Nombre completo de la imagen docker"
-    value: ${{ steps.tag_imagen.outputs.full_nombre }}
+    value: ${{ steps.tag_imagen.outputs.tag }}
 
 runs:
   using: "composite"
@@ -31,7 +31,7 @@ runs:
         nombre_completo="$image_name:$version"
         echo "el nombre completo de la imagen es: $nombre_completo"
 
-        echo "full_nombre=$nombre_completo" >> $GITHUB_OUTPUT
+        echo "tag=$nombre_completo" >> $GITHUB_OUTPUT
 
         
 
