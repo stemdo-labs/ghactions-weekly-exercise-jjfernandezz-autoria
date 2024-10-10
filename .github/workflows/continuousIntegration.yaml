@@ -26,3 +26,8 @@ jobs:
       - name: Mostrar imagen comleta
         run: |
           echo "nombre completo: ${{steps.taggear-imagen.outputs.full_name}}"
+
+      # Verificar si el output de la acción composite está disponible
+      - name: Verificar output de acción composite
+        run: |
+          echo "::debug::Output full_name: ${{ steps.taggear_imagen.outputs.full_name }}"
