@@ -22,7 +22,7 @@ runs:
       run: ls -la
 
     - name: extraer inputs
-      id: tag-image
+      id: tag-imagen
       shell: bash
       run: |
         image_name=${{inputs.image_name}}
