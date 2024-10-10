@@ -19,6 +19,8 @@ jobs:
       - name: accion composite
         uses: ./.github/actions/taggear-imagen
         id: tag
+        env:
+          username: ${{ vars.DOCKER_USERNAME}}
         with:
           image_name: "mi-app-angular"
           version: "${{steps.tomar_version.outputs.version}}"

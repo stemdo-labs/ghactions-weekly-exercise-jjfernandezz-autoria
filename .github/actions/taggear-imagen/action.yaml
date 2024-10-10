@@ -24,11 +24,13 @@ runs:
     - name: extraer inputs
       id: tag-imagen
       shell: bash
+      env:
+        user: ${{env.username}}
       run: |
         image_name=${{inputs.image_name}}
         version=${{inputs.version}}
 
-        nombre_completo="$image_name:$version"
+        nombre_completo="$user/$image_name:$version"
         echo "el nombre completo de la imagen es: $nombre_completo"
 
         echo "tag=$nombre_completo" >> $GITHUB_OUTPUT
