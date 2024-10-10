@@ -23,6 +23,6 @@ jobs:
           image_name: "mi-app-angular"
           version: "${{steps.tomar_version.outputs.version}}"
 
-      - name: Mostrar imagen comleta
+      - name: Mostrar imagen completa
         run: |
           echo "nombre completo: ${{ steps.taggear_imagen.outputs.full_name}} "
