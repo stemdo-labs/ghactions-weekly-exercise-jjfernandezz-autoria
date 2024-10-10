@@ -24,5 +24,4 @@ jobs:
           version: "${{steps.tomar_version.outputs.version}}"
 
       - name: Mostrar imagen completa
-        run: |
-          echo "nombre completo: ${{ steps.tag.outputs.tag}} "
+        run: echo ${{ steps.tag.outputs.tag}} 
