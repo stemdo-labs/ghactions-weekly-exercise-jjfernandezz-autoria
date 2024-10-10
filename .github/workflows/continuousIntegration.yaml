@@ -18,11 +18,11 @@ jobs:
 
       - name: accion composite
         uses: ./.github/actions/taggear-imagen
-        id: taggear_imagen
+        id: tag
         with:
           image_name: "mi-app-angular"
           version: "${{steps.tomar_version.outputs.version}}"
 
       - name: Mostrar imagen completa
         run: |
-          echo "nombre completo: ${{ steps.taggear_imagen.outputs.full_name}} "
+          echo "nombre completo: ${{ steps.tag.outputs.tag}} "
