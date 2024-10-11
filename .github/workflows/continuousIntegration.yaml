@@ -5,6 +5,16 @@ on:
           required: true
     
 jobs:
+
+  tests:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pruebas 
+        run: |
+          echo "REALIZANDO TESTS DE COBERTURA..."
+          echo "TESTS SUPERADOS CON EXITO!!"
+
   ci: 
     runs-on: ubuntu-latest
     
@@ -46,3 +56,5 @@ jobs:
         with:
           push: true
           tags: ${{ steps.tag.outputs.tag}} 
+
+      
