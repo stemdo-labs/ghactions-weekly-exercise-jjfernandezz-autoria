@@ -1,7 +1,11 @@
 on:
   workflow_dispatch:
   
-
+  push:
+    branches:
+      - main
+      - development
+      
 jobs:
   ci-cd:
     runs-on: ubuntu-latest
@@ -26,11 +30,11 @@ jobs:
           echo "REALIZANDO TESTS DE COBERTURA..."
           echo "TESTS SUPERADOS CON EXITO!!"
 
-  llamar_cd_prod:
+  efectuar_cd_prod:
     needs: tests
     uses: ./.github/workflows/continuousDeployment.yaml
   
-  llamar_cd_uat:
+  cd_uat:
     environment:
       name: uat
     needs: llamar_ci
@@ -39,7 +43,7 @@ jobs:
       - name: continuous deployment
         run: echo "Se efectua el CD!"
   
-  efectuar_cd:
+  efectuar_cd_uat:
     needs: llamar_cd_uat
     uses: ./.github/workflows/continuousDeployment.yaml
   
