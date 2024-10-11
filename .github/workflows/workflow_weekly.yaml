@@ -5,7 +5,7 @@ on:
     branches:
       - main
       - development
-      
+
 jobs:
   ci-cd:
     runs-on: ubuntu-latest
@@ -44,7 +44,7 @@ jobs:
         run: echo "Se efectua el CD!"
   
   efectuar_cd_uat:
-    needs: llamar_cd_uat
+    needs: cd_uat
     uses: ./.github/workflows/continuousDeployment.yaml
   
 
