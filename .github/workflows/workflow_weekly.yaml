@@ -32,7 +32,7 @@ jobs:
   efectuar_cd_prod:
     needs: cd_prod
     uses: ./.github/workflows/continuousDeployment.yaml
-    with: ${{needs.llamar_ci.outputs.imagen_docker}}
+    with: ${{needs.llamar_ci.outputs.tag}}
 
   
   cd_uat:
@@ -48,6 +48,6 @@ jobs:
   efectuar_cd_uat:
     needs: cd_uat
     uses: ./.github/workflows/continuousDeployment.yaml
-    with: ${{needs.llamar_ci.outputs.imagen_docker}}
+    with: ${{needs.llamar_ci.outputs.tag}}
   
 
