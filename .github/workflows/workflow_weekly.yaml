@@ -4,12 +4,10 @@ on:
 
 jobs:
   ci-cd:
-    environment:
-      name: uat
     runs-on: ubuntu-latest
     steps:
-      - name: Inicio de ci/cd en UAT
-        run: "Se inicia la integracion y despliegue continuo en UAT"
+      - name: Inicio de ci/cd 
+        run: echo "Se inicia la integracion y despliegue continuo"
 
   llamar_ci:
     needs: ci-cd
@@ -17,28 +15,32 @@ jobs:
     secrets:
       DOCKERHUB_TOKEN: ${{secrets.DOCKERHUB_TOKEN}}
 
-  llamar_cd:
-    needs: llamar_ci
-    uses: ./.github/workflows/continuousDeployment.yaml
-
-  cd-test:
-    needs: llamar_cd
+  tests:
     environment:
       name: produccion
-    runs-on: ubuntu-latest
-    steps:
-      - name: Inicio cd/test en prod
-        run: echo "Da inicio al despliegue y el testing en produccion"
-  
-  llamar_cd2:
-    needs: cd-test
-    uses: ./.github/workflows/continuousDeployment.yaml
-
-  tests:
-    needs: llamar_cd2
+    needs: llamar_ci
     runs-on: ubuntu-latest
     steps:
       - name: Pruebas 
         run: |
           echo "REALIZANDO TESTS DE COBERTURA..."
           echo "TESTS SUPERADOS CON EXITO!!"
+
+  llamar_cd_prod:
+    needs: tests
+    uses: ./.github/workflows/continuousDeployment.yaml
+  
+  llamar_cd_uat:
+    environment:
+      name: uat
+    needs: llamar_ci
+    runs-on: ubuntu-latest
+    steps:
+      - name: continuous deployment
+        run: echo "Se efectua el CD!"
+  
+  efectuar_cd:
+    needs: llamar_cd_uat
+    uses: /.github/workflows/continuousDeployment.yaml
+  
+
