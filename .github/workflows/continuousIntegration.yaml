@@ -50,6 +50,7 @@ jobs:
         run: echo "imagen_docker=${{steps.tomar_version.outputs.version}}" >> $GITHUB_OUTPUT
 
 
+
       - name: mostrar variables
         run: echo "${{vars.DOCKER_USERNAME}} ${{secrets.DOCKERHUB_TOKEN}}"
 
@@ -65,4 +66,8 @@ jobs:
           push: true
           tags: ${{ steps.tag.outputs.tag}} 
 
+
+    outputs:
+      imagen_docker: ${{steps.tomar_version.outputs.version}}
+      
       

@@ -29,7 +29,7 @@ jobs:
           version: "${{steps.tomar_version.outputs.version}}"
       
       - name: mostrar imagen dockerrrrrr
-        run: echo "${{needs.llamar_ci.outputs.imagen_docker}}"
+        run: echo "${{inputs.imagen_docker}}"
 
       - name: hacer run del contenedor
         run: docker run -dit -p 8080:8080 ${{ steps.tag.outputs.tag}} 
