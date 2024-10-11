@@ -41,6 +41,6 @@ jobs:
   
   efectuar_cd:
     needs: llamar_cd_uat
-    uses: /.github/workflows/continuousDeployment.yaml
+    uses: ./.github/workflows/continuousDeployment.yaml
   
 
