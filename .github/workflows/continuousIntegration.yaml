@@ -22,7 +22,8 @@ jobs:
 
   ci: 
     runs-on: ubuntu-latest
-    
+    outputs:
+      imagen_docker: ${{steps.imagen_docker1.outputs.imagen_docker}}
     steps:
       - name: clonamos repo
         uses: actions/checkout@v4
@@ -48,8 +49,7 @@ jobs:
 
       - name: Guardar output 
         id: imagen_docker1
-        run: echo "imagen_docker=${{steps.tomar_version.outputs.version}}" >> $GITHUB_OUTPUT
-
+        run: echo "imagen_docker=${{steps.tag.outputs.tag}}" >> $GITHUB_OUTPUT
 
 
       - name: mostrar variables
@@ -67,8 +67,5 @@ jobs:
           push: true
           tags: ${{ steps.tag.outputs.tag}} 
 
-
-    outputs:
-      imagen_docker: ${{steps.imagen_docker1.outputs.imagen_docker}}
       
       
