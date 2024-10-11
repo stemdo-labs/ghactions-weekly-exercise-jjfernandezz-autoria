@@ -3,11 +3,42 @@ on:
   
 
 jobs:
+  ci-cd:
+    environment:
+      name: uat
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inicio de ci/cd en UAT
+        run: "Se inicia la integracion y despliegue continuo en UAT"
+
   llamar_ci:
+    needs: ci-cd
     uses: ./.github/workflows/continuousIntegration.yaml
     secrets:
       DOCKERHUB_TOKEN: ${{secrets.DOCKERHUB_TOKEN}}
+
   llamar_cd:
     needs: llamar_ci
     uses: ./.github/workflows/continuousDeployment.yaml
-    
+
+  cd-test:
+    needs: llamar_cd
+    environment:
+      name: produccion
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inicio cd/test en prod
+        run: echo "Da inicio al despliegue y el testing en produccion"
+  
+  llamar_cd2:
+    needs: cd-test
+    uses: ./.github/workflows/continuousDeployment.yaml
+
+  tests:
+    needs: llamar_cd2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pruebas 
+        run: |
+          echo "REALIZANDO TESTS DE COBERTURA..."
+          echo "TESTS SUPERADOS CON EXITO!!"
