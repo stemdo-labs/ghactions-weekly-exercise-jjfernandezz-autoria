@@ -30,7 +30,7 @@ jobs:
         run: echo "Se efectua el CD!"
 
   efectuar_cd_prod:
-    needs: tests
+    needs: cd_prod
     uses: ./.github/workflows/continuousDeployment.yaml
   
   cd_uat:
