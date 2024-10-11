@@ -19,22 +19,22 @@ jobs:
     secrets:
       DOCKERHUB_TOKEN: ${{secrets.DOCKERHUB_TOKEN}}
 
-  tests:
+  cd_prod:
+    if: github.ref == 'refs/heads/main'
     environment:
       name: produccion
     needs: llamar_ci
     runs-on: ubuntu-latest
     steps:
-      - name: Pruebas 
-        run: |
-          echo "REALIZANDO TESTS DE COBERTURA..."
-          echo "TESTS SUPERADOS CON EXITO!!"
+      - name: continuous deployment
+        run: echo "Se efectua el CD!"
 
   efectuar_cd_prod:
-    needs: tests
+    needs: cd_prod
     uses: ./.github/workflows/continuousDeployment.yaml
   
   cd_uat:
+    if: github.ref == 'refs/heads/development'
     environment:
       name: uat
     needs: llamar_ci
