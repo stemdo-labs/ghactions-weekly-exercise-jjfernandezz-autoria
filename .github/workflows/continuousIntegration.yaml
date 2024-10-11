@@ -3,7 +3,12 @@ on:
     secrets:
         DOCKERHUB_TOKEN:
           required: true
+  
+    outputs:
+      tag:
+        value: ${{ jobs.ci.outputs.imagen_docker}}
     
+
 jobs:
 
   tests:
@@ -39,7 +44,10 @@ jobs:
           version: "${{steps.tomar_version.outputs.version}}"
 
       - name: Mostrar imagen completa
-        run: echo ${{ steps.tag.outputs.tag}} 
+        run: echo ${{ steps.tag.outputs.tag}}
+
+      - name: Guardar output 
+        run: echo "imagen_docker=${{steps.tomar_version.outputs.version}}" >> $GITHUB_OUTPUT
 
 
       - name: mostrar variables
