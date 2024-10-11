@@ -5,7 +5,9 @@ on:
 jobs:
   llamar_ci:
     uses: ./.github/workflows/continuousIntegration.yaml
-  
+    secrets:
+      DOCKERHUB_TOKEN: ${{secrets.DOCKERHUB_TOKEN}}
   llamar_cd:
     needs: llamar_ci
     uses: ./.github/workflows/continuousDeployment.yaml
+    
