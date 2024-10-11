@@ -47,6 +47,7 @@ jobs:
         run: echo ${{ steps.tag.outputs.tag}}
 
       - name: Guardar output 
+        id: imagen_docker1
         run: echo "imagen_docker=${{steps.tomar_version.outputs.version}}" >> $GITHUB_OUTPUT
 
 
@@ -68,6 +69,6 @@ jobs:
 
 
     outputs:
-      imagen_docker: ${{steps.tomar_version.outputs.version}}
+      imagen_docker: ${{steps.imagen_docker1.outputs.imagen_docker}}
       
       
