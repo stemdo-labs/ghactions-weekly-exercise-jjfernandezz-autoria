@@ -1,0 +1,11 @@
+on:
+  workflow_dispatch:
+  
+
+jobs:
+  llamar_ci:
+    uses: ./.github/workflows/continuousIntegration.yaml
+  
+  llamar_cd:
+    needs: llamar_ci
+    uses: ./.github/workflows/continuousDeployment.yaml
