@@ -31,8 +31,8 @@ jobs:
       - name: mostrar imagen dockerrrrrr
         run: echo "${{inputs.imagen_docker}}"
 
-      - name: hacer run del contenedor
-        run: docker run -dit -p 8080:8080 ${{ steps.tag.outputs.tag}} 
+      # - name: hacer run del contenedor
+      #   run: docker run -dit -p 8080:8080 ${{ steps.tag.outputs.tag}} 
 
-      - name: comprobar el despliegue haciendo curl
-        run: curl http://localhost:8080
+      # - name: comprobar el despliegue haciendo curl
+      #   run: curl http://localhost:8080

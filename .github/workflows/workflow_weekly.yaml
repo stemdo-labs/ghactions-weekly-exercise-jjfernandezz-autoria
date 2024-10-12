@@ -42,20 +42,20 @@ jobs:
   #     imagen_docker: ${{needs.llamar_ci.outputs.tag_image}}
 
   
-  # cd_uat:
-  #   if: github.ref == 'refs/heads/development'
-  #   environment:
-  #     name: uat
-  #   needs: llamar_ci
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: continuous deployment
-  #       run: echo "Se efectua el CD!"
+  cd_uat:
+    if: github.ref == 'refs/heads/development'
+    environment:
+      name: uat
+    needs: llamar_ci
+    runs-on: ubuntu-latest
+    steps:
+      - name: continuous deployment
+        run: echo "Se efectua el CD!"
   
-  # efectuar_cd_uat:
-  #   needs: cd_uat
-  #   uses: ./.github/workflows/continuousDeployment.yaml
-  #   with:
-  #     imagen_docker: ${{needs.llamar_ci.outputs.tag}}
+  efectuar_cd_uat:
+    needs: [cd_uat, llamar_ci]
+    uses: ./.github/workflows/continuousDeployment.yaml
+    with:
+      imagen_docker: ${{needs.llamar_ci.outputs.tag}}
   
 
