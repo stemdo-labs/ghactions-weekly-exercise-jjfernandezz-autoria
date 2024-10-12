@@ -5,7 +5,7 @@ on:
           required: true
   
     outputs:
-      tag:
+      tag_image:
         value: ${{ jobs.ci.outputs.imagen_docker}}
     
 
@@ -22,7 +22,8 @@ jobs:
 
   ci: 
     runs-on: ubuntu-latest
-    
+    outputs:
+      imagen_docker: ${{steps.imagen_docker1.outputs.imagen_docker}}
     steps:
       - name: clonamos repo
         uses: actions/checkout@v4
@@ -47,12 +48,8 @@ jobs:
         run: echo ${{ steps.tag.outputs.tag}}
 
       - name: Guardar output 
-        run: echo "imagen_docker=${{steps.tomar_version.outputs.version}}" >> $GITHUB_OUTPUT
-
-
-
-      - name: mostrar variables
-        run: echo "${{vars.DOCKER_USERNAME}} ${{secrets.DOCKERHUB_TOKEN}}"
+        id: imagen_docker1
+        run: echo "imagen_docker=${{steps.tag.outputs.tag}}" >> $GITHUB_OUTPUT
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
@@ -66,8 +63,5 @@ jobs:
           push: true
           tags: ${{ steps.tag.outputs.tag}} 
 
-
-    outputs:
-      imagen_docker: ${{steps.tomar_version.outputs.version}}
       
       

@@ -30,9 +30,10 @@ jobs:
         run: echo "Se efectua el CD!"
 
   efectuar_cd_prod:
-    needs: cd_prod
+    needs: [llamar_ci, cd_prod ]
     uses: ./.github/workflows/continuousDeployment.yaml
-    with: ${{needs.llamar_ci.outputs.imagen_docker}}
+    with: 
+      imagen_docker_completa: "${{needs.llamar_ci.outputs.tag_image}}"
 
   
   cd_uat:
@@ -46,8 +47,9 @@ jobs:
         run: echo "Se efectua el CD!"
   
   efectuar_cd_uat:
-    needs: cd_uat
+    needs: [llamar_ci, cd_uat]
     uses: ./.github/workflows/continuousDeployment.yaml
-    with: ${{needs.llamar_ci.outputs.imagen_docker}}
+    with:
+      imagen_docker_completa: "${{needs.llamar_ci.outputs.tag_image}}"
   
 
