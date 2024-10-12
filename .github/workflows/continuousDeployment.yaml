@@ -1,7 +1,7 @@
 on:
   workflow_call:
     inputs:
-      imagen_docker:
+      imagen_docker_completa:
         required: true
         type: string
     
@@ -29,7 +29,7 @@ jobs:
           version: "${{steps.tomar_version.outputs.version}}"
       
       - name: mostrar imagen dockerrrrrr
-        run: echo "${{inputs.imagen_docker}}"
+        run: echo ${{inputs.imagen_docker_completa}}
 
       # - name: hacer run del contenedor
       #   run: docker run -dit -p 8080:8080 ${{ steps.tag.outputs.tag}} 
