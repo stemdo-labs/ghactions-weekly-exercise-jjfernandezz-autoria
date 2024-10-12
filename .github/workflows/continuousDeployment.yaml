@@ -9,30 +9,33 @@ jobs:
   cd:
     runs-on: ubuntu-latest
     steps:
-      - name: clonamos repo
-        uses: actions/checkout@v4
+      # - name: clonamos repo
+      #   uses: actions/checkout@v4
 
-      - name: Se obtiene la version
-        id: tomar_version
-        run: |
-          version=$(jq -r '.version' package.json)
-          echo "La version del la app es: $version"
-          echo "version=$version" >> $GITHUB_OUTPUT
+      # - name: Se obtiene la version
+      #   id: tomar_version
+      #   run: |
+      #     version=$(jq -r '.version' package.json)
+      #     echo "La version del la app es: $version"
+      #     echo "version=$version" >> $GITHUB_OUTPUT
 
-      - name: accion composite
-        uses: ./.github/actions/taggear-imagen
-        id: tag
-        env:
-          username: ${{ vars.DOCKER_USERNAME }}
-        with:
-          image_name: "mi-app-angular"
-          version: "${{steps.tomar_version.outputs.version}}"
+      # - name: accion composite
+      #   uses: ./.github/actions/taggear-imagen
+      #   id: tag
+      #   env:
+      #     username: ${{ vars.DOCKER_USERNAME }}
+      #   with:
+      #     image_name: "mi-app-angular"
+      #     version: "${{steps.tomar_version.outputs.version}}"
       
-      - name: mostrar imagen dockerrrrrr
-        run: echo ${{inputs.imagen_docker_completa}}
+      # - name: mostrar imagen dockerrrrrr
+      #   run: echo ${{inputs.imagen_docker_completa}}
 
-      # - name: hacer run del contenedor
-      #   run: docker run -dit -p 8080:8080 ${{ steps.tag.outputs.tag}} 
+      - name: hacemos pull de la imagen
+        run: docker pull ${{inputs.imagen_docker_completa}}
 
-      # - name: comprobar el despliegue haciendo curl
-      #   run: curl http://localhost:8080
+      - name: hacer run del contenedor
+        run: docker run -dit -p 8080:8080 ${{inputs.imagen_docker_completa}} 
+
+      - name: comprobar el despliegue haciendo curl
+        run: curl http://localhost:8080
