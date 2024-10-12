@@ -18,38 +18,44 @@ jobs:
     uses: ./.github/workflows/continuousIntegration.yaml
     secrets:
       DOCKERHUB_TOKEN: ${{secrets.DOCKERHUB_TOKEN}}
-
-  cd_prod:
-    if: github.ref == 'refs/heads/main'
-    environment:
-      name: produccion
+  
+  job_comprobar_imagen:
     needs: llamar_ci
     runs-on: ubuntu-latest
     steps:
-      - name: continuous deployment
-        run: echo "Se efectua el CD!"
+      - run: echo ${{needs.llamar_ci.outputs.tag_image}}
 
-  efectuar_cd_prod:
-    needs: cd_prod
-    uses: ./.github/workflows/continuousDeployment.yaml
-    with: 
-      imagen_docker: ${{needs.llamar_ci.outputs.tag}}
+  # cd_prod:
+  #   if: github.ref == 'refs/heads/main'
+  #   environment:
+  #     name: produccion
+  #   needs: llamar_ci
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: continuous deployment
+  #       run: echo "Se efectua el CD!"
+
+  # efectuar_cd_prod:
+  #   needs: cd_prod
+  #   uses: ./.github/workflows/continuousDeployment.yaml
+  #   with: 
+  #     imagen_docker: ${{needs.llamar_ci.outputs.tag_image}}
 
   
-  cd_uat:
-    if: github.ref == 'refs/heads/development'
-    environment:
-      name: uat
-    needs: llamar_ci
-    runs-on: ubuntu-latest
-    steps:
-      - name: continuous deployment
-        run: echo "Se efectua el CD!"
+  # cd_uat:
+  #   if: github.ref == 'refs/heads/development'
+  #   environment:
+  #     name: uat
+  #   needs: llamar_ci
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: continuous deployment
+  #       run: echo "Se efectua el CD!"
   
-  efectuar_cd_uat:
-    needs: cd_uat
-    uses: ./.github/workflows/continuousDeployment.yaml
-    with:
-      imagen_docker: ${{needs.llamar_ci.outputs.tag}}
+  # efectuar_cd_uat:
+  #   needs: cd_uat
+  #   uses: ./.github/workflows/continuousDeployment.yaml
+  #   with:
+  #     imagen_docker: ${{needs.llamar_ci.outputs.tag}}
   
 
