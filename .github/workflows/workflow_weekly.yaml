@@ -18,12 +18,6 @@ jobs:
     uses: ./.github/workflows/continuousIntegration.yaml
     secrets:
       DOCKERHUB_TOKEN: ${{secrets.DOCKERHUB_TOKEN}}
-  
-  job_comprobar_imagen:
-    needs: llamar_ci
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo ${{needs.llamar_ci.outputs.tag_image}}
 
   cd_prod:
     if: github.ref == 'refs/heads/main'
