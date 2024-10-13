@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: continuous deployment
-        run: echo "Se efectua el CD!"
+        run: echo "Se efectua el CD en el entorno de ${{vars.ENTORNO}}!"
 
   efectuar_cd_prod:
     needs: [llamar_ci, cd_prod ]
@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: continuous deployment
-        run: echo "Se efectua el CD!"
+        run: echo "Se efectua el CD en el entorno de ${{vars.ENTORNO}}!"
   
   efectuar_cd_uat:
     needs: [llamar_ci, cd_uat]
