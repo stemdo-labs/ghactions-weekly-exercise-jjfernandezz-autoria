@@ -47,10 +47,15 @@ jobs:
       - name: Mostrar imagen completa
         run: echo ${{ steps.tag.outputs.tag}}
 
+      - name: mostrar rama
+        run: |
+            echo $github.ref
+            echo ${{github.ref}}
+            echo github.ref
       - name: Guardar output main
         id: imagen_docker1
         run: |
-          if [[ github.ref == 'refs/heads/main' ]]; then
+          if [[ ${{github.ref}} == 'refs/heads/main' ]]; then
             echo "imagen_docker=${{steps.tag.outputs.tag}}" >> $GITHUB_OUTPUT
           else
             echo "imagen_docker=${{steps.tag.outputs.tag}}-snapshot" >> $GITHUB_OUTPUT
